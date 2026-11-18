@@ -10,6 +10,10 @@
 #include "application.h"
 #include "system_info.h"
 
+#if defined(CONFIG_AGENT_SKELETON_ENABLE) && defined(CONFIG_AGENT_SKELETON_AUTO_START)
+#include "agent_skeleton.h"
+#endif
+
 #define TAG "main"
 
 extern "C" void app_main(void)
@@ -29,4 +33,11 @@ extern "C" void app_main(void)
     // Launch the application
     auto& app = Application::GetInstance();
     app.Start();
+
+#if defined(CONFIG_AGENT_SKELETON_ENABLE) && defined(CONFIG_AGENT_SKELETON_AUTO_START)
+    // Optional bring-up path for the additive agent skeleton (stubs).
+    if (!AgentSkeleton::GetInstance().Start()) {
+        ESP_LOGW(TAG, "Agent skeleton failed to start");
+    }
+#endif
 }

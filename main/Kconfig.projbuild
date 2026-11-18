@@ -607,6 +607,38 @@ config RECEIVE_CUSTOM_MESSAGE
     help
         Enable custom message reception, allow the device to receive custom messages from the server (preferably through the MQTT protocol)
 
+menu "Agent Skeleton"
+    config AGENT_SKELETON_ENABLE
+        bool "Enable Agent Skeleton modules"
+        default n
+        depends on IDF_TARGET_ESP32S3
+        help
+            Compile and optionally start the additive AI agent skeleton under main/agent/
+            (HAL, wake/VAD, audio pipeline, cloud ASR/LLM/TTS, custom voice, peripherals).
+            Stubs only; does not replace the production Application path.
+
+    config AGENT_SKELETON_AUTO_START
+        bool "Auto-start Agent Skeleton from app_main"
+        default n
+        depends on AGENT_SKELETON_ENABLE
+        help
+            Call AgentSkeleton::Start() after Application::Start() for bring-up / demos.
+
+    config AGENT_SKELETON_WS_URL
+        string "Default WebSocket URL (stub)"
+        default "wss://api.example.com/agent/ws"
+        depends on AGENT_SKELETON_ENABLE
+        help
+            Placeholder cloud WebSocket endpoint for the skeleton CloudClient.
+
+    config AGENT_SKELETON_HTTP_URL
+        string "Default HTTP base URL (stub)"
+        default "https://api.example.com/agent"
+        depends on AGENT_SKELETON_ENABLE
+        help
+            Placeholder cloud HTTP base URL for the skeleton CloudClient.
+endmenu
+
 menu "TAIJIPAI_S3_CONFIG"
     depends on BOARD_TYPE_ESP32S3_Taiji_Pi
     choice I2S_TYPE_TAIJIPI_S3

@@ -582,6 +582,32 @@ if(CONFIG_IDF_TARGET_ESP32)
                              )
 endif()
 
+# Additive ESP32-S3 AI agent skeleton (interfaces + stubs under main/agent/)
+if(CONFIG_AGENT_SKELETON_ENABLE)
+    list(APPEND SOURCES
+        "agent/agent_skeleton.cc"
+        "agent/hal/audio_io_stub.cc"
+        "agent/hal/microphone_stub.cc"
+        "agent/hal/camera_hal_stub.cc"
+        "agent/wake/wake_vad_stub.cc"
+        "agent/pipeline/audio_stream_pipeline_stub.cc"
+        "agent/cloud/cloud_websocket_stub.cc"
+        "agent/cloud/cloud_http_stub.cc"
+        "agent/cloud/cloud_client_stub.cc"
+        "agent/voice/custom_voice_config.cc"
+        "agent/peripherals/peripheral_registry.cc"
+    )
+    list(APPEND INCLUDE_DIRS
+        "agent"
+        "agent/hal"
+        "agent/wake"
+        "agent/pipeline"
+        "agent/cloud"
+        "agent/voice"
+        "agent/peripherals"
+    )
+endif()
+
 idf_component_register(SRCS ${SOURCES}
                     EMBED_FILES ${LANG_SOUNDS} ${COMMON_SOUNDS}
                     INCLUDE_DIRS ${INCLUDE_DIRS}

@@ -126,6 +126,11 @@ The firmware connects to the official [xiaozhi.me](https://xiaozhi.me) server by
 - [MCP Protocol Interaction Flow](docs/mcp-protocol.md) - Device-side MCP protocol implementation
 - [MQTT + UDP Hybrid Communication Protocol Document](docs/mqtt-udp.md)
 - [A detailed WebSocket communication protocol document](docs/websocket.md)
+- [Agent Skeleton architecture (ESP32-S3)](main/agent/README.md) - Extensible AI agent skeleton: HAL / wake+VAD / audio stream / cloud ASR·LLM·TTS / custom voice / peripheral extensions
+
+### Agent Skeleton
+
+An **additive** skeleton lives under `main/agent/` for ESP32-S3 smart-hardware AI agents: on-device interaction plus a cloud brain (ASR / LLM / TTS / aggregation & search). Disabled by default; enable via `menuconfig` → Xiaozhi Assistant → Agent Skeleton. Interfaces and stubs are ready to swap for real drivers or adapters to existing `audio/` and `protocols/` code.
 
 ## Large Model Configuration
 
