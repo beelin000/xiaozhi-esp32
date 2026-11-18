@@ -130,7 +130,7 @@ v1 的稳定版本为 1.9.2，可以通过 `git checkout v1` 来切换到 v1 版
 
 ### Agent Skeleton（骨架模块）
 
-在现有固件旁增加了一套 **additive** 骨架（`main/agent/`），面向 ESP32-S3 智能硬件 AI Agent：端侧交互 + 云端大脑（ASR / LLM / TTS / 聚合检索）。默认关闭，可通过 `menuconfig` → Xiaozhi Assistant → Agent Skeleton 启用。接口与 stub 实现齐全，便于替换为真实驱动或对接现有 `audio/`、`protocols/` 代码。
+在现有固件旁增加了一套 **additive** 骨架（`main/agent/`），面向 ESP32-S3 智能硬件 AI Agent：端侧交互 + **可切换** 大脑（默认云端，或局域网 Jetson 等本地 companion 上的 Whisper / Qwen / Piper）。ASR → LLM → TTS 三段重叠流式；重模型不在 S3 上跑。默认关闭，可通过 `menuconfig` → Xiaozhi Assistant → Agent Skeleton 启用。
 
 ## 大模型配置
 

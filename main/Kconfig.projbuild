@@ -614,8 +614,8 @@ menu "Agent Skeleton"
         depends on IDF_TARGET_ESP32S3
         help
             Compile and optionally start the additive AI agent skeleton under main/agent/
-            (HAL, wake/VAD, audio pipeline, cloud ASR/LLM/TTS, custom voice, peripherals).
-            Stubs only; does not replace the production Application path.
+            (HAL, wake/VAD, audio pipeline, swappable cloud/local brain, custom voice,
+            peripherals). Stubs only; does not replace the production Application path.
 
     config AGENT_SKELETON_AUTO_START
         bool "Auto-start Agent Skeleton from app_main"
@@ -624,12 +624,27 @@ menu "Agent Skeleton"
         help
             Call AgentSkeleton::Start() after Application::Start() for bring-up / demos.
 
+    choice AGENT_SKELETON_BRAIN_BACKEND
+        prompt "Brain Backend"
+        default AGENT_SKELETON_BRAIN_CLOUD
+        depends on AGENT_SKELETON_ENABLE
+        help
+            Select the ASR/LLM/TTS brain behind BrainBackend. Cloud is the default.
+            Local runs models on an off-device companion (e.g. Jetson Orin Nano), not on
+            the ESP32-S3. Stages overlap: streaming ASR → LLM tokens → TTS audio.
+
+        config AGENT_SKELETON_BRAIN_CLOUD
+            bool "Cloud (default)"
+        config AGENT_SKELETON_BRAIN_LOCAL
+            bool "Local companion (Jetson / LAN)"
+    endchoice
+
     config AGENT_SKELETON_WS_URL
         string "Default WebSocket URL (stub)"
         default "wss://api.example.com/agent/ws"
         depends on AGENT_SKELETON_ENABLE
         help
-            Placeholder cloud WebSocket endpoint for the skeleton CloudClient.
+            Placeholder cloud WebSocket endpoint for the skeleton CloudClient / cloud brain.
 
     config AGENT_SKELETON_HTTP_URL
         string "Default HTTP base URL (stub)"
@@ -637,6 +652,34 @@ menu "Agent Skeleton"
         depends on AGENT_SKELETON_ENABLE
         help
             Placeholder cloud HTTP base URL for the skeleton CloudClient.
+
+    config AGENT_SKELETON_LOCAL_COMPANION_URL
+        string "Local companion URL (stub)"
+        default "ws://192.168.1.50:8080/agent"
+        depends on AGENT_SKELETON_BRAIN_LOCAL
+        help
+            LAN endpoint of the off-device companion that runs Whisper / Qwen / Piper.
+
+    config AGENT_SKELETON_LOCAL_ASR_MODEL
+        string "Local ASR model hint"
+        default "whisper-small"
+        depends on AGENT_SKELETON_BRAIN_LOCAL
+        help
+            Hint passed to the companion (not loaded on the ESP32-S3).
+
+    config AGENT_SKELETON_LOCAL_LLM_MODEL
+        string "Local LLM model hint"
+        default "qwen-3b"
+        depends on AGENT_SKELETON_BRAIN_LOCAL
+        help
+            Hint passed to the companion (~3B-class for Orin Nano 8GB).
+
+    config AGENT_SKELETON_LOCAL_TTS_MODEL
+        string "Local TTS model hint"
+        default "piper"
+        depends on AGENT_SKELETON_BRAIN_LOCAL
+        help
+            Hint passed to the companion for chunked TTS.
 endmenu
 
 menu "TAIJIPAI_S3_CONFIG"

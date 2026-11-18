@@ -594,6 +594,11 @@ if(CONFIG_AGENT_SKELETON_ENABLE)
         "agent/cloud/cloud_websocket_stub.cc"
         "agent/cloud/cloud_http_stub.cc"
         "agent/cloud/cloud_client_stub.cc"
+        "agent/brain/brain_backend_factory.cc"
+        "agent/brain/cloud_brain_backend.cc"
+        "agent/brain/local_brain_backend.cc"
+        "agent/brain/streaming_voice_session.cc"
+        "agent/local/local_companion_stub.cc"
         "agent/voice/custom_voice_config.cc"
         "agent/peripherals/peripheral_registry.cc"
     )
@@ -603,6 +608,8 @@ if(CONFIG_AGENT_SKELETON_ENABLE)
         "agent/wake"
         "agent/pipeline"
         "agent/cloud"
+        "agent/brain"
+        "agent/local"
         "agent/voice"
         "agent/peripherals"
     )

@@ -130,7 +130,7 @@ The firmware connects to the official [xiaozhi.me](https://xiaozhi.me) server by
 
 ### Agent Skeleton
 
-An **additive** skeleton lives under `main/agent/` for ESP32-S3 smart-hardware AI agents: on-device interaction plus a cloud brain (ASR / LLM / TTS / aggregation & search). Disabled by default; enable via `menuconfig` → Xiaozhi Assistant → Agent Skeleton. Interfaces and stubs are ready to swap for real drivers or adapters to existing `audio/` and `protocols/` code.
+An **additive** skeleton lives under `main/agent/` for ESP32-S3 smart-hardware AI agents: on-device interaction plus a **swappable** brain (cloud by default, or a LAN Jetson-class companion running Whisper / Qwen / Piper). ASR → LLM → TTS stages overlap for streaming; heavy models do not run on the S3. Disabled by default; enable via `menuconfig` → Xiaozhi Assistant → Agent Skeleton.
 
 ## Large Model Configuration
 
