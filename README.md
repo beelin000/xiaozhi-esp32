@@ -126,6 +126,11 @@ v1 的稳定版本为 1.9.2，可以通过 `git checkout v1` 来切换到 v1 版
 - [MCP 协议交互流程](docs/mcp-protocol.md) - 设备端 MCP 协议的实现方式
 - [MQTT + UDP 混合通信协议文档](docs/mqtt-udp.md)
 - [一份详细的 WebSocket 通信协议文档](docs/websocket.md)
+- [Agent Skeleton 架构（ESP32-S3）](main/agent/README.md) - 可扩展 AI 智能体骨架：HAL / 唤醒与 VAD / 音频流 / 云端 ASR·LLM·TTS / 自定义音色 / 外设扩展
+
+### Agent Skeleton（骨架模块）
+
+在现有固件旁增加了一套 **additive** 骨架（`main/agent/`），面向 ESP32-S3 智能硬件 AI Agent：端侧交互 + **可切换** 大脑（默认云端，或局域网 Jetson 等本地 companion 上的 Whisper / Qwen / Piper）。ASR → LLM → TTS 三段重叠流式；重模型不在 S3 上跑。默认关闭，可通过 `menuconfig` → Xiaozhi Assistant → Agent Skeleton 启用。
 
 ## 大模型配置
 
