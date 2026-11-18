@@ -119,6 +119,13 @@ The firmware connects to the official [xiaozhi.me](https://xiaozhi.me) server by
 - Linux is better than Windows for faster compilation and fewer driver issues
 - This project uses Google C++ code style, please ensure compliance when submitting code
 
+### Product & Architecture (development baseline)
+
+Subsequent ESP32-S3 smart-hardware AI agent work should follow these root-level docs (`docs/` remains protocol and hardware imagery):
+
+- [PRODUCT_SPECS.md](PRODUCT_SPECS.md) — Product specs: real-time voice, custom voice, cloud LLM, peripheral expansion, local streaming (Jetson) target
+- [DESIGN.md](DESIGN.md) — Architecture: HAL / wake+VAD / streaming pipeline, cloud I/O, swappable local vs cloud backends, alignment with `main/agent/`
+
 ### Developer Documentation
 
 - [Custom Board Guide](docs/custom-board.md) - Learn how to create custom boards for XiaoZhi AI

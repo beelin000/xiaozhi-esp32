@@ -119,6 +119,13 @@ v1 的稳定版本为 1.9.2，可以通过 `git checkout v1` 来切换到 v1 版
 - Linux 比 Windows 更好，编译速度快，也免去驱动问题的困扰
 - 本项目使用 Google C++ 代码风格，提交代码时请确保符合规范
 
+### 产品与架构（后续开发基线）
+
+后续 ESP32-S3 智能硬件 AI Agent 开发以以下文档为准（位于仓库根目录；`docs/` 仍为协议与硬件图文档）：
+
+- [PRODUCT_SPECS.md](PRODUCT_SPECS.md) — 产品规格：实时语音、自定义音色、云端 LLM、外设扩展、本地流式（Jetson）目标
+- [DESIGN.md](DESIGN.md) — 架构设计：HAL / 唤醒与 VAD / 流式管线、云端通信、可切换本地与云端后端、与 `main/agent/` 骨架对齐
+
 ### 开发者文档
 
 - [自定义开发板指南](docs/custom-board.md) - 学习如何为小智 AI 创建自定义开发板
